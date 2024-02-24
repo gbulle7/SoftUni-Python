@@ -1,42 +1,38 @@
-#
-#
-#
-# events = input().split("|")
-# total_energy = 100
-# total_coins = 100
-# bakery_is_open = True
-# for event in events:
-#     event_items = event.split("-")
-#     type_of_event = event_items[0]
-#     value_of_event = int(event_items[1])
-#     # type_of_event, value_of_event = event.split("-")
-#     # value_of_event = int(value_of_event)
-#     if type_of_event == "rest":
-#         initial_energy = total_energy
-#         total_energy += value_of_event
-#         if total_energy > 100:
-#             total_energy = 100
-#         gained_energy = total_energy - initial_energy
-#         print(f"You gained {gained_energy} energy.")
-#         print(f"Current energy: {total_energy}.")
-#     elif type_of_event == "order":
-#         if total_energy >= 30:
-#             total_energy -= 30
-#             total_coins += value_of_event
-#             print(f"You earned {value_of_event} coins.")
-#         else:
-#             total_energy += 50
-#             print("You had to rest!")
-#     else:
-#         if total_coins >= value_of_event:
-#             total_coins -= value_of_event
-#             print(f"You bought {type_of_event}.")
-#         else:
-#             bakery_is_open = False
-#             break
-# if bakery_is_open:
-#     print("Day completed!")
-#     print(f"Coins: {total_coins}")
-#     print(f"Energy: {total_energy}")
-# else: #bakery_is_open = False
-#     print(f"Closed! Cannot afford {type_of_event}." )
+events = input().split('|')
+total_energy = 100
+total_coins = 100
+
+for current_event in events:
+    event = current_event.split('-')
+    event_type, event_value = event[0], int(event[1])
+
+    if event_type == 'rest':
+        energy = total_energy
+        total_energy += event_value
+        if total_energy > 100:
+            total_energy = 100
+        gained_energy = total_energy - energy
+        print(f'You gained {gained_energy} energy.')
+        print(f'Current energy: {total_energy}.')
+
+    elif event_type == 'order':
+        if total_energy >= 30:
+            total_energy -= 30
+            total_coins += event_value
+            print(f'You earned {event_value} coins.')
+        else:
+            total_energy += 50
+            print(f'You had to rest!')
+
+    else:
+        if total_coins >= event_value:
+            total_coins -= event_value
+            print(f'You bought {event_type}.')
+        else:
+            print(f'Closed! Cannot afford {event_type}.')
+            break
+
+else:
+    print(f'Day completed!'
+          f'\nCoins: {total_coins}'
+          f'\nEnergy: {total_energy}')

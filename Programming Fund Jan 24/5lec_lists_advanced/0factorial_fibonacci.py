@@ -1,3 +1,16 @@
+# Fibonacci Sequence
+# def fibonacci_sequence(num):
+#   if num == 0:
+#     return [0]
+#   fibonacci_list = [0, 1]
+#   for _ in range(1, num):
+#     next_number = fibonacci_list[-1] + fibonacci_list[-2]
+#     fibonacci_list.append(next_number)
+#   return fibonacci_list
+# number = abs(int(input()))
+# print(fibonacci_sequence(number))
+
+
 # fibonacci with list
 # x = int(input())
 # lst = [0, 1]
@@ -16,6 +29,18 @@
 #         return fibonacci(x-1) + fibonacci(x-2)
 # a = int(input())
 # print(fibonacci(a))
+
+
+# Factorial with Reduce method
+# from functools import reduce
+# number = int(input())
+# numbers = []
+# for _ in range(number):
+#     numbers.append(number)
+#     number -= 1
+# result = reduce(lambda a, b: a * b, numbers)
+# print(result)
+
 
 # factorial with math lib
 # from math import factorial
@@ -38,9 +63,6 @@
 # a = int(input())
 # print(factorial(a))
 
-# factorial with list
-# a = int(input())
-# lst = [a for _ in range(a)]
 
 # factorial with numpy
 # import numpy

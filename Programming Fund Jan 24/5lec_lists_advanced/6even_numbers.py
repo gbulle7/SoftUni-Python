@@ -1,10 +1,10 @@
-# numbers = input().split(', ')
-# indices = []
-# for index, number in enumerate(numbers):
-#     if int(number) % 2 == 0:
-#         indices.append(index)
-#
-# print(indices)
+numbers = input().split(', ')
+indices = []
+for index, number in enumerate(numbers):
+    if int(number) % 2 == 0:
+        indices.append(index)
+
+print(indices)
 
 
 # list_numbers = list(map(int, input().split(', ')))

@@ -1,3 +1,4 @@
+# Generate a pyramid pattern with asterisks
 height = 7  # Adjust the height of the pyramid as needed
 
 for i in range(height):  # Outer loop for each row

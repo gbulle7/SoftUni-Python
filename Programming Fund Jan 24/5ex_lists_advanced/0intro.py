@@ -14,5 +14,3 @@
 # names = ['Tim', 'Dim', 'Sim', 'Tis']
 # filtered_names = filter(lambda name: name.startswith('T'), names)
 # print(list(filtered_names))
-
-# Generate a pyramid pattern with asterisks

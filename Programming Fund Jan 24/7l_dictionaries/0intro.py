@@ -144,3 +144,20 @@ data1 = ['Tim', 'Zac', 'Josh']
 data2 = [23, 18, 34]
 my_dict18 = dict(zip(data1, data2))
 print(my_dict18)
+
+
+# Insert from iterable
+my_dict19 = {'a': 1, 'b': 2, 'c': 3}
+my_dict19.update({'d': 4, 'e': 5})                  # {'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5}
+print(my_dict19)
+
+
+# Set Default
+my_dict20 = {'a': 1, 'b': 2, 'c': 3}
+new_dict3 = {}
+for key, value in my_dict20.items():
+    if value % 2 == 0:
+        new_dict3.setdefault('even', []).append(key)
+    else:
+        new_dict3.setdefault('odd', []).append(key)
+print(new_dict3)                                    # {'odd': ['a', 'c'], 'even': ['b']}

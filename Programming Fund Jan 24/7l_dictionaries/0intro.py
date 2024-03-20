@@ -101,3 +101,46 @@ dictionary = {key: value for (key, value) in data}    # {'Peter': 22, 'Amy': 18,
 nums = [1, 2, 3]
 cubes = {num: num ** 3 for num in nums}               # {1: 1, 2: 8, 3: 27}
 
+
+# Renaming a Key
+my_dict15 = {1:'a', 2:'b', 3:'c'}
+new_dict = {'two' if k == 2 else k:v for k, v in my_dict15.items()}
+print(new_dict)                                      # {1:'a', 'two':'b', 3:'c'}
+
+
+# Getting the Key of a given Value
+mydict = {'george': 16, 'amber': 19}
+print(list(mydict.keys())[list(mydict.values()).index(16)])     # george
+
+# Swapping Values to the Keys
+my_dict16 = {'name': 'Tim', 'age': 30}
+my_dict16['name'], my_dict16['age'] = my_dict16['age'], my_dict16['name']
+print(my_dict16)                                    # {'name': 30, 'age': 'Tim'}
+
+
+# Inserting key-value pair
+# Existing dictionary
+existing_dict = {'a': 1, 'b': 2, 'c': 3}
+# New key-value pair to insert
+new_key = 'x'
+new_value = 10
+# Inserting the new key-value pair between 'b' and 'c'
+new_dict2 = {}
+for key, value in existing_dict.items():
+    new_dict2[key] = value
+    if key == 'b':
+        new_dict2[new_key] = new_value
+print(new_dict2)                                    # {'a': 1, 'b': 2, 'x': 10, 'c': 3}
+
+
+# Group pairs of list elements into a dictionary
+my_list1 = [1, 2, 3, 4]
+my_dict17 = {my_list1[i]: my_list1[i + 1] for i in range(0, len(my_list1), 2)}
+print(my_dict17)                                    # {1: 2, 3: 4}
+
+
+# Zipping
+data1 = ['Tim', 'Zac', 'Josh']
+data2 = [23, 18, 34]
+my_dict18 = dict(zip(data1, data2))
+print(my_dict18)

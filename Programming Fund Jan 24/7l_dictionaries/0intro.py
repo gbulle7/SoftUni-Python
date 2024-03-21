@@ -161,3 +161,8 @@ for key, value in my_dict20.items():
     else:
         new_dict3.setdefault('odd', []).append(key)
 print(new_dict3)                                    # {'odd': ['a', 'c'], 'even': ['b']}
+
+
+# Create a dictionary w/ .fromkeys()
+my_dict21 = dict.fromkeys(['a', 'b', 'c'], 0)
+print(my_dict21)                                    # {'a': 0, 'b': 0, 'c': 0}

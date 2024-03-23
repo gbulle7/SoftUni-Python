@@ -11,6 +11,8 @@ for _ in range(number_students):
 
 for student in students:
     students[student] = sum(students[student]) / len(students[student])
+# students_above_average = {name: sum(grades) / len(grades) for name, grades in students.items()
+#                           if sum(grades) / len(grades) >= 4.50}
 
 # passing_students = students.copy()
 for student, average_grade in students.items():

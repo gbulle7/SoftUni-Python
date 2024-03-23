@@ -14,3 +14,5 @@ while user_data != 'End':
 for company, employees in companies.items():
     print(company)
     print('--', '\n-- '.join(employees))
+    # for employee_id in employees:
+    #         print(f'-- {employee_id}')

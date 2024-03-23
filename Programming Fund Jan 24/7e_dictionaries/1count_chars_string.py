@@ -1,4 +1,5 @@
 words = input().split()
+# words = [char for char in input() if char != " "]
 occurrences = {}
 
 for word in words:

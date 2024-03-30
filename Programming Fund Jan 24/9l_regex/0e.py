@@ -12,3 +12,12 @@ result4 = re.sub(r'o', 'Y', text)
 print(result4)                                  # HeLlOY WYrld              Replaced 'o' wih 'Y'
 result5 = re.subn(r'o', 'Y', text)
 print(result5)                                  # ('HeLlOY WYrld', 2)       Replaced 'o' wih 'Y'; 2 times
+
+
+text2 = '@something@ @something# #something#'
+pattern1 = r'(([@#$])\w+\2)'        # \2 group backreference uses most recently matched symbol in group 2 (inner group)
+match1 = re.findall(pattern1, text2)
+print(match1)
+pattern2 = r'(([@#$])\w+([@#$]))'
+match2 = re.findall(pattern2, text2)
+print(match2)

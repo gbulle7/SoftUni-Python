@@ -1,67 +1,98 @@
 from collections import deque
 
-def robots_data_input():
-    robots = input().split(";")
-    robots_data = []
+robots_data = input().split(';')
+robots = []
+for robot in robots_data:
+    name, process_time = robot.split('-')
+    robots.append({'name': name, 'process_time': int(process_time), 'busy_until_time': 0})
+
+hours, minutes, seconds = map(int, input().split(':'))
+global_time = hours * 3600 + minutes * 60 + seconds
+
+products = deque()
+while True:
+    product = input()
+    if product == "End":
+        break
+    products.append(product)
+
+while products:
+    current_product = products.popleft()
+    global_time += 1
     for robot in robots:
-        current_robot = robot.split("-")
-        robot_name = current_robot[0]
-        robot_process_time = int(current_robot[1])
-        robot_available_time = robot_process_time
-        robot_data = [robot_name, robot_process_time, robot_available_time, "free"]
-        robots_data.append(robot_data)
-    return robots_data              # list of robots
+        if robot['busy_until_time'] <= global_time:
+            robot['busy_until_time'] = global_time + robot['process_time']
+            h = global_time // 3600 % 24
+            m = global_time % 3600 // 60
+            s = global_time % 3600 % 60
+            print(f"{robot['name']} - {current_product} [{h:02d}:{m:02d}:{s:02d}]")
+            break
+    else:   # No available robots
+        products.append(current_product)
 
 
-def start_time():
-    hours, minutes, seconds = list(map(int, input().split(":")))
-    time_in_seconds = hours * 3600 + minutes * 60 + seconds
-    return time_in_seconds
-
-
-def format_time(time_s):
-    h = time_s // 3600 % 24
-    m = time_s % 3600 // 60
-    s = time_s % 3600 % 60
-    return f'{h:02d}:{m:02d}:{s:02d}'
-
-
-def product_complete(robot, product, time):
-    time = format_time(time)
-    print(f"{robot} - {product} [{time}]")
-
-
-def main():
-    robots_list = robots_data_input()
-    global_time = start_time()
-    product_queue = deque()
-
-    product_name = input()
-    while product_name != "End":
-        product_queue.append(product_name)
-        product_name = input()
-
-    while product_queue:
-        global_time += 1
-        current_prod = product_queue.popleft()
-        for robot in robots_list:
-            name = robot[0]
-            processing_time = robot[1]
-            if robot[3] == "busy":
-                robot[2] -= 1
-                if robot[2] <= 0:
-                    robot[2] = processing_time
-                    robot[3] = "free"
-            if robot[3] == "free":
-                product_complete(name, current_prod, global_time)
-                robot[3] = "busy"
-                break
-        else:
-            product_queue.append(current_prod)
-
-
-if __name__ == "__main__":
-    main()
+# def robots_data_input():
+#     robots = input().split(";")
+#     robots_data = []
+#     for robot in robots:
+#         current_robot = robot.split("-")
+#         robot_name = current_robot[0]
+#         robot_process_time = int(current_robot[1])
+#         robot_available_time = robot_process_time
+#         robot_data = [robot_name, robot_process_time, robot_available_time, "free"]
+#         robots_data.append(robot_data)
+#     return robots_data              # list of robots
+#
+#
+# def start_time():
+#     hours, minutes, seconds = list(map(int, input().split(":")))
+#     time_in_seconds = hours * 3600 + minutes * 60 + seconds
+#     return time_in_seconds
+#
+#
+# def format_time(time_s):
+#     h = time_s // 3600 % 24
+#     m = time_s % 3600 // 60
+#     s = time_s % 3600 % 60
+#     return f'{h:02d}:{m:02d}:{s:02d}'
+#
+#
+# def product_complete(robot, product, time):
+#     time = format_time(time)
+#     print(f"{robot} - {product} [{time}]")
+#
+#
+# def main():
+#     robots_list = robots_data_input()
+#     global_time = start_time()
+#     product_queue = deque()
+#
+#     product_name = input()
+#     while product_name != "End":
+#         product_queue.append(product_name)
+#         product_name = input()
+#
+#     while product_queue:
+#         global_time += 1
+#         current_prod = product_queue.popleft()
+#         for robot in robots_list:
+#             name = robot[0]
+#             processing_time = robot[1]
+#             if robot[3] == "busy":
+#                 robot[2] -= 1
+#                 if robot[2] <= 0:
+#                     robot[2] = processing_time
+#                     robot[3] = "free"
+#             if robot[3] == "free":
+#                 product_complete(name, current_prod, global_time)
+#                 robot[3] = "busy"
+#                 break
+#         else:
+#             product_queue.append(current_prod)
+#
+#
+# if __name__ == "__main__":
+#     main()
 
 
 # from collections import deque

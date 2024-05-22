@@ -17,6 +17,7 @@ print(*[sum(col) for col in sums], sep='\n')
 
 
 # Method 3
+# rows, columns = [int(x) for x in input().split(', ')]
 # matrix = []
 # for _ in range(rows):
 #     row = [int(x) for x in input().split()]
@@ -27,5 +28,5 @@ print(*[sum(col) for col in sums], sep='\n')
 #     for row_index in range(rows):
 #         column_sum += matrix[row_index][column_index]
 #     result.append(column_sum)
-# [print(x) for x in result]
+#     print(column_sum)
 

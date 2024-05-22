@@ -10,3 +10,10 @@ print([element for row in matrix for element in row])
 #     for element in row:
 #         flattened_matrix.append(element)
 # print(flattened_matrix)
+
+# Method 3
+flattened = []
+for i in range(rows):
+    row = [int(element) for element in input().split(', ')]
+    flattened.extend(row)
+print(flattened)

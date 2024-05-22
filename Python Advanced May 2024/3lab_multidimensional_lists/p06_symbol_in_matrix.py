@@ -12,19 +12,18 @@ else:
 # Method 2
 # size = int(input())
 # matrix = []
-# for _ in range(0, size):
+# for _ in range(size):
 #     matrix.append(list(input()))
 # symbol = input()
-# location = ()
-# found = False
+# location = None
 # for row in range(size):
-#     if found:
+#     if location:
 #         break
 #     for col in range(size):
 #         if matrix[row][col] == symbol:
 #             location = (row, col)
-#             found = True
-# if found:
+#             break
+# if location:
 #     print(location)
 # else:
 #     print(f"{symbol} does not occur in the matrix")

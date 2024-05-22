@@ -1,0 +1,30 @@
+# Method 1
+size = int(input())
+matrix = [[x for x in input()] for i in range(size)]
+symbol = input()
+for row in matrix:
+    if symbol in row:
+        print((matrix.index(row), row.index(symbol)))
+        break
+else:
+    print(f'{symbol} does not occur in the matrix')
+
+# Method 2
+# size = int(input())
+# matrix = []
+# for _ in range(0, size):
+#     matrix.append(list(input()))
+# symbol = input()
+# location = ()
+# found = False
+# for row in range(size):
+#     if found:
+#         break
+#     for col in range(size):
+#         if matrix[row][col] == symbol:
+#             location = (row, col)
+#             found = True
+# if found:
+#     print(location)
+# else:
+#     print(f"{symbol} does not occur in the matrix")

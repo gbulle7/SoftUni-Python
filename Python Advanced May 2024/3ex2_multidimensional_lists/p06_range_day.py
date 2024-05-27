@@ -1,94 +1,141 @@
-size = 5
-targets_shot = []
-remaining_targets = 0
+SIZE = 5
 matrix = []
-a_row, a_col = (0, 0)
+my_position = []
+targets = 0
 
-for row in range(size):
+for row in range(SIZE):
     matrix.append(input().split())
-    for col in range(size):
+    for col in range(SIZE):
         if matrix[row][col] == 'A':
-            a_row, a_col = row, col
+            my_position = [row, col]
         elif matrix[row][col] == 'x':
-            remaining_targets += 1
+            targets += 1
 
+directions = {'up': (-1, 0), 'down': (1, 0), 'left': (0, -1), 'right': (0, 1)}
+targets_down = []
 
-def shoot(direction, mat, r, c):
-    t_shot = False
-    t_psn = (0, 0)
-    while (r in range(len(mat)) and c in range(len(mat))) and not t_shot:
-        if direction == 'up' and (r - 1) in range(len(mat)):
-            if mat[r - 1][c] == 'x':
-                t_shot = True
-                t_psn = (r - 1, c)
-                break
-            r -= 1
-            continue
-        elif direction == 'down' and (r + 1) in range(len(mat)):
-            if mat[r + 1][c] == 'x':
-                t_shot = True
-                t_psn = (r + 1, c)
-                break
-            r += 1
-            continue
-        elif direction == 'left' and (c - 1) in range(len(mat)):
-            if mat[r][c - 1] == 'x':
-                t_shot = True
-                t_psn = (r, c - 1)
-                break
-            c -= 1
-            continue
-        elif direction == 'right' and (c + 1) in range(len(mat)):
-            if mat[r][c + 1] == 'x':
-                t_shot = True
-                t_psn = (r, c + 1)
-                break
-            c += 1
-            continue
-        break
-    t_row, t_col = t_psn
-    return t_shot, t_row, t_col
-
-
-def move(direction, steps, mat, r, c):
-    a_r, a_c = r, c
-    if direction == 'up':
-        a_r, a_c = r - steps, c
-    elif direction == 'down':
-        a_r, a_c = r + steps, c
-    elif direction == 'left':
-        a_r, a_c = r, c - steps
-    elif direction == 'right':
-        a_r, a_c = r, c + steps
-    if a_r in range(len(mat)) and a_c in range(len(mat)) and mat[a_r][a_c] == '.':
-        mat[r][c] = '.'
-        mat[a_r][a_c] = 'A'
-        r, c = a_r, a_c
-    return r, c
-
-
-cmds = int(input())
-for _ in range(cmds):
+for _ in range(int(input())):
     command = input().split()
-    if command[0] == 'move':
-        a_row, a_col = move(command[1], int(command[2]), matrix, a_row, a_col)
-    elif command[0] == 'shoot':
-        target_shot, target_r, target_c = shoot(command[1], matrix, a_row, a_col)
-        if target_shot:
-            matrix[target_r][target_c] = '.'
-            targets_shot.append([target_r, target_c])
-            remaining_targets -= 1
-    if not remaining_targets:
-        break
+    if command[0] == 'shoot':
+        row = my_position[0] + directions[command[1]][0]
+        col = my_position[1] + directions[command[1]][1]
+        while 0 <= row < SIZE and 0 <= col < SIZE:
+            if matrix[row][col] == 'x':
+                matrix[row][col] = '.'
+                targets -= 1
+                targets_down.append([row, col])
+                break
+            row += directions[command[1]][0]
+            col += directions[command[1]][1]
+        if targets == 0:
+            print(f'Training completed! All {len(targets_down)} targets hit.')
+            break
 
-if remaining_targets:
-    print(f"Training not completed! {remaining_targets} targets left.")
-else:
-    print(f'Training completed! All {len(targets_shot)} targets hit.')
-[print(target) for target in targets_shot]
+    elif command[0] == 'move':
+        row = my_position[0] + directions[command[1]][0] * int(command[2])
+        col = my_position[1] + directions[command[1]][1] * int(command[2])
+        if 0 <= row < SIZE and 0 <= col < SIZE and matrix[row][col] == '.':
+            matrix[row][col] = 'A'
+            matrix[my_position[0]][my_position[1]] = '.'
+            my_position = [row, col]
+
+if targets > 0:
+    print(f'Training not completed! {targets} targets left.')
+[print(row) for row in targets_down]
 
 
 # Method 2
+# SIZE = 5
+# targets_shot = []
+# remaining_targets = 0
+# matrix = []
+# a_row, a_col = (0, 0)
+#
+# for row in range(SIZE):
+#     matrix.append(input().split())
+#     for col in range(SIZE):
+#         if matrix[row][col] == 'A':
+#             a_row, a_col = row, col
+#         elif matrix[row][col] == 'x':
+#             remaining_targets += 1
+#
+#
+# def shoot(direction, mat, r, c):
+#     t_shot = False
+#     t_psn = (0, 0)
+#     while (r in range(len(mat)) and c in range(len(mat))) and not t_shot:
+#         if direction == 'up' and (r - 1) in range(len(mat)):
+#             if mat[r - 1][c] == 'x':
+#                 t_shot = True
+#                 t_psn = (r - 1, c)
+#                 break
+#             r -= 1
+#             continue
+#         elif direction == 'down' and (r + 1) in range(len(mat)):
+#             if mat[r + 1][c] == 'x':
+#                 t_shot = True
+#                 t_psn = (r + 1, c)
+#                 break
+#             r += 1
+#             continue
+#         elif direction == 'left' and (c - 1) in range(len(mat)):
+#             if mat[r][c - 1] == 'x':
+#                 t_shot = True
+#                 t_psn = (r, c - 1)
+#                 break
+#             c -= 1
+#             continue
+#         elif direction == 'right' and (c + 1) in range(len(mat)):
+#             if mat[r][c + 1] == 'x':
+#                 t_shot = True
+#                 t_psn = (r, c + 1)
+#                 break
+#             c += 1
+#             continue
+#         break
+#     t_row, t_col = t_psn
+#     return t_shot, t_row, t_col
+#
+#
+# def move(direction, steps, mat, r, c):
+#     a_r, a_c = r, c
+#     if direction == 'up':
+#         a_r, a_c = r - steps, c
+#     elif direction == 'down':
+#         a_r, a_c = r + steps, c
+#     elif direction == 'left':
+#         a_r, a_c = r, c - steps
+#     elif direction == 'right':
+#         a_r, a_c = r, c + steps
+#     if a_r in range(len(mat)) and a_c in range(len(mat)) and mat[a_r][a_c] == '.':
+#         mat[r][c] = '.'
+#         mat[a_r][a_c] = 'A'
+#         r, c = a_r, a_c
+#     return r, c
+#
+#
+# cmds = int(input())
+# for _ in range(cmds):
+#     command = input().split()
+#     if command[0] == 'move':
+#         a_row, a_col = move(command[1], int(command[2]), matrix, a_row, a_col)
+#     elif command[0] == 'shoot':
+#         target_shot, target_r, target_c = shoot(command[1], matrix, a_row, a_col)
+#         if target_shot:
+#             matrix[target_r][target_c] = '.'
+#             targets_shot.append([target_r, target_c])
+#             remaining_targets -= 1
+#     if not remaining_targets:
+#         break
+#
+# if remaining_targets:
+#     print(f"Training not completed! {remaining_targets} targets left.")
+# else:
+#     print(f'Training completed! All {len(targets_shot)} targets hit.')
+# [print(target) for target in targets_shot]
+
+
+# Method 3
 # def move(direction, steps, r, c):
 #     if direction == 'up':
 #         a_r, a_c = r - steps, c

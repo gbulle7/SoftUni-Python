@@ -38,3 +38,28 @@ def operate(operator, *args):
 
 print(operate("+", 1, 2, 3))
 print(operate("*", 3, 4))
+
+
+# Method 2
+# from functools import reduce
+#
+# def operate(operator, *args):
+#     if operator == '+':
+#         return reduce(lambda x, y: x + y, args)
+#     elif operator == '-':
+#         return reduce(lambda x, y: x - y, args)
+#     elif operator == '*':
+#         return reduce(lambda x, y: x * y, args)
+#     elif operator == '/':
+#         return reduce(lambda x, y: x / y, args)
+
+
+# Method 3
+# mapper = {
+#     '+': lambda nums: reduce(lambda x, y: x + y, nums),
+#     '-': lambda nums: reduce(lambda x, y: x - y, nums),
+#     '*': lambda nums: reduce(lambda x, y: x * y, nums),
+#     '/': lambda nums: reduce(lambda x, y: x / y, nums),
+# }
+# def operate(operator, *args):
+#     return mapper[operator](args)

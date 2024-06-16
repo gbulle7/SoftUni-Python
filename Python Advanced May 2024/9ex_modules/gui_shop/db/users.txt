@@ -1,2 +1,2 @@
-{"username": "sim", "password": "321", "first_name": "s", "last_name": "i", "products": [1, 2, 2, 2, 3, 7, 7]}
-{"username": "rsv", "password": "123", "first_name": "r", "last_name": "v", "products": []}
+{"username": "sim", "password": "321", "first_name": "s", "last_name": "i", "products": [1, 2, 2, 2, 3, 7, 7], "is_admin": true}
+{"username": "rsv", "password": "123", "first_name": "r", "last_name": "v", "products": [10]}
